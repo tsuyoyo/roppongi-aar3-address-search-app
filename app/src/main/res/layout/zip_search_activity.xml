@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="model"
+            type="tsuyoyo.roppongiaar3.model.ZipSearchActivityModel" />
+
+        <variable
+            name="searchBtnListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="郵便番号を7桁で入力して下さい"/>
+
+        <!--
+        "@={model.zipCode}" と書くことで、EditTextに入力された値がmodelのzipCodeフィールドに入る。
+        いわゆる「双方向binding」(逆に @{model.zipCode} とすると、EditTextの入力値はmodelに反映されない)。
+        -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={model.zipCode}"/>
+
+        <!--
+        一方で 検索結果表示 の部分は、javaから代入された値を反映させるだけなので、"@{model.address}"でOK。
+        -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{model.address}"/>
+
+        <!--
+        住所検索を開始する時に押すボタン
+        (android:setOnClickListenerは、onClick属性にしてcallbackを指定する方法もあるけど、
+        android:setXXXListenerとしてXXXListenerを代入する方法は、onClick以外でも使えるので
+        あえてこの方法で書いておきました) 。
+        -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:setOnClickListener="@{searchBtnListener}"/>
+
+    </LinearLayout>
+</layout>
